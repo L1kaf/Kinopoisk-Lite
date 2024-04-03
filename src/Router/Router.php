@@ -22,7 +22,15 @@ class Router
             $this->notFound();
         }
 
-        $route->getAction()();
+        if (is_array($route->getAction())) {
+            [$controller, $action] = $route->getAction();
+
+            $controller = new $controller();
+
+            call_user_func([$controller, $action]);
+        } else {
+            call_user_func($route->getAction());
+        }
     }
 
     private function notFound(): void
@@ -48,9 +56,9 @@ class Router
             $this->routes[$route->getMethod()][$route->getUri()] = $route;
         }
     }
-    
+
     private function getRoutes(): array
     {
-        return require_once APP_PATH.'/config/routes.php';
+        return require_once APP_PATH . '/config/routes.php';
     }
 }
