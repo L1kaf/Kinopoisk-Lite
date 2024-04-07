@@ -10,9 +10,7 @@ class View implements ViewInterface
 {
     public function __construct(
         private SessionInterface $session
-    )
-    {
-
+    ) {
     }
     public function page(string $name): void
     {

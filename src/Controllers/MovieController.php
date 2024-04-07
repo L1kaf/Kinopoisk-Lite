@@ -20,7 +20,7 @@ class MovieController extends Controller
             'name' => ['required', 'min:3', 'max:50']
         ]);
 
-        if(!$validation) {
+        if (!$validation) {
             foreach ($this->request()->errors() as $field => $errors) {
                 $this->session()->set($field, $errors);
             }
