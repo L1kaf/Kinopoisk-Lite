@@ -13,6 +13,12 @@ database.php - database configuration
 
 auth.php - user authentication configuration
 
+Creating a link to Storage:
+
+```shell
+ln -s $PWD/storage $PWD/public/storage
+```
+
 
 ### System Requirements:
 ---

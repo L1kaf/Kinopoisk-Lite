@@ -1,0 +1,29 @@
+<?php
+
+namespace App\Kernel\Storage;
+
+use App\Kernel\Config\ConfigInterface;
+use App\Kernel\Storage\StorageInterface;
+
+class Storage implements StorageInterface
+{
+    public function __construct(
+        private ConfigInterface $config,
+    ) {
+    }
+    #[\Override] public function url(string $path): string
+    {
+        $url = $this->config->get('app.url', 'http://localhost:8000');
+        return "$url/storage/$path";
+    }
+
+    #[\Override] public function get(string $path): string
+    {
+        return file_get_contents($this->storagePath());
+    }
+
+    private function storagePath(string $path)
+    {
+        return APP_PATH . "/storage/$path";
+    }
+}

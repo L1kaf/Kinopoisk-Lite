@@ -8,7 +8,7 @@
 <?php $view->component('start') ?>
 <h1>Add Movie</h1>
 
-<form action="/admin/movies/add" method="post">
+<form action="/admin/movies/add" method="post" enctype="multipart/form-data">
     <p>Имя</p>
     <div>
         <input type="text" name="name">
@@ -20,6 +20,9 @@
         <?php endforeach; ?>
     </ul>
     <?php endif; ?>
+    <div>
+        <input type="file" name="image">
+    </div>
     <div>
         <button>Добавить</button>
     </div>
