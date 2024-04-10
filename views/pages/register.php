@@ -21,7 +21,7 @@ $view->component('start'); ?>
                                 <div id="checkName" class="invalid-feedback">
                                     <?php echo $session->getFlash('name')[0] ?>
                                 </div>
-                            <?php endif ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ $view->component('start'); ?>
                                 <div id="checkEmail" class="invalid-feedback">
                                     <?php echo $session->getFlash('email')[0] ?>
                                 </div>
-                            <?php endif ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@ $view->component('start'); ?>
                                 <div id="checkPassword" class="invalid-feedback">
                                     <?php echo $session->getFlash('password')[0] ?>
                                 </div>
-                            <?php endif ?>
+                            <?php endif; ?>
                         </div>
                     </div>
                     <div class="col-md">
