@@ -23,4 +23,7 @@ return [
     Route::post('/admin/categories/update', [CategoryController::class, 'update']),
     Route::get('/admin/movies/add', [MovieController::class, 'create']),
     Route::post('/admin/movies/add', [MovieController::class, 'store']),
+    Route::post('/admin/movies/destroy', [MovieController::class, 'destroy']),
+    Route::get('/admin/movies/update', [MovieController::class, 'edit']),
+    Route::post('/admin/movies/update', [MovieController::class, 'update']),
 ];

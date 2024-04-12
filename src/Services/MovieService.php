@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Kernel\Database\Database;
 use App\Kernel\Upload\UploadedFileInterface;
+use App\Models\Movie;
 
 class MovieService
 {
@@ -22,5 +23,57 @@ class MovieService
             'preview' => $filePath,
             'category_id' => $category,
         ]);
+    }
+
+    public function all(): array
+    {
+        $movies = $this->db->get('movies');
+
+        return array_map(function ($movie) {
+            return new Movie(
+                $movie['id'],
+                $movie['name'],
+                $movie['description'],
+                $movie['preview'],
+                $movie['category_id'],
+            );
+        }, $movies);
+    }
+
+    public function destroy(int $id): void
+    {
+        $this->db->delete('movies', ['id' => $id]);
+    }
+
+    public function find(int $id): ?Movie
+    {
+        $movie = $this->db->first('movies', ['id' => $id]);
+
+        if (! $movie) {
+            return null;
+        }
+
+        return new Movie(
+            $movie['id'],
+            $movie['name'],
+            $movie['description'],
+            $movie['preview'],
+            $movie['category_id']
+        );
+    }
+
+    public function update(int $id, string $name, string $description, ?UploadedFileInterface $image, int $category): void
+    {
+        $data = [
+            'name' => $name,
+            'description' => $description,
+            'category_id' => $category,
+        ];
+
+        if ($image && ! $image->hasError()) {
+            $data['preview'] = $image->move('movies');
+        }
+
+        $this->db->update('movies', $data, ['id' => $id]);
     }
 }
