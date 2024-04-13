@@ -104,4 +104,11 @@ class MovieController extends Controller
 
         $this->redirect('/admin');
     }
+
+    public function show(): void
+    {
+        $this->view('movie', [
+            'movie' => $this->service()->find($this->request()->input('id')),
+        ]);
+    }
 }

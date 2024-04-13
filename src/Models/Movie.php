@@ -9,7 +9,8 @@ class Movie
         private string $name,
         private string $description,
         private string $preview,
-        private string $categoryId
+        private string $categoryId,
+        private string $createdAt,
     ) {
     }
 
@@ -36,5 +37,10 @@ class Movie
     public function categoryId(): string
     {
         return $this->categoryId;
+    }
+
+    public function createdAt(): string
+    {
+        return $this->createdAt;
     }
 }

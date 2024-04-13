@@ -36,6 +36,7 @@ class MovieService
                 $movie['description'],
                 $movie['preview'],
                 $movie['category_id'],
+                $movie['created_at'],
             );
         }, $movies);
     }
@@ -58,12 +59,18 @@ class MovieService
             $movie['name'],
             $movie['description'],
             $movie['preview'],
-            $movie['category_id']
+            $movie['category_id'],
+            $movie['created_at'],
         );
     }
 
-    public function update(int $id, string $name, string $description, ?UploadedFileInterface $image, int $category): void
-    {
+    public function update(
+        int $id,
+        string $name,
+        string $description,
+        ?UploadedFileInterface $image,
+        int $category
+    ): void {
         $data = [
             'name' => $name,
             'description' => $description,
@@ -75,5 +82,21 @@ class MovieService
         }
 
         $this->db->update('movies', $data, ['id' => $id]);
+    }
+
+    public function new()
+    {
+        $movies = $this->db->get('movies', [], ['id' => 'DESC'], 10);
+
+        return array_map(function ($movie) {
+            return new Movie(
+                $movie['id'],
+                $movie['name'],
+                $movie['description'],
+                $movie['preview'],
+                $movie['category_id'],
+                $movie['created_at'],
+            );
+        }, $movies);
     }
 }
