@@ -87,7 +87,7 @@ class MovieService
         $this->db->update('movies', $data, ['id' => $id]);
     }
 
-    public function new()
+    public function new(): array
     {
         $movies = $this->db->get('movies', [], ['id' => 'DESC'], 10);
 
@@ -99,6 +99,7 @@ class MovieService
                 $movie['preview'],
                 $movie['category_id'],
                 $movie['created_at'],
+                $this->getReviews($movie['id'])
             );
         }, $movies);
     }
